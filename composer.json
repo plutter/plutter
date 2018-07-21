@@ -1,0 +1,28 @@
+{
+    "name": "cellulax/cellulax",
+    "description": "A smart web framework",
+    "type": "library",
+    "license": "Apache-2.0",
+    "version": "0.0.1",
+    "authors": [
+        {
+            "name": "Z. Chabihi",
+            "email": "z.chabihi@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.0"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/cellulax/cellulax"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Cellulax\\": "src/"
+        }
+    }
+}
