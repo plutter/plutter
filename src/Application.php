@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
-namespace Cellulax;
+namespace Plutter;
 
-use Cellulax\Kernel\Bootstrap;
-use Cellulax\Kernel\Component;
+use Plutter\Kernel\Bootstrap;
+use Plutter\Kernel\Component;
 
 
 class Application {

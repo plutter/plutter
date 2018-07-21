@@ -1,5 +1,5 @@
 {
-    "name": "cellulax/cellulax",
+    "name": "plutter/plutter",
     "description": "A smart web framework",
     "type": "library",
     "license": "Apache-2.0",
@@ -12,17 +12,18 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "php": "^7.0"
+        "php": "^7.0",
+        "symfony/yaml": "^3.4"
     },
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/cellulax/cellulax"
+            "url": "https://github.com/plutter/plutter"
         }
     ],
     "autoload": {
         "psr-4": {
-            "Cellulax\\": "src/"
+            "Plutter\\": "src/"
         }
     }
 }

@@ -1,11 +1,11 @@
 <?php
-namespace Cellulax\Kernel;
+namespace Plutter\Kernel;
 
 use Symfony\Component\Yaml\Yaml;
 
-use Cellulax\Exception\ConfigException;
+use Plutter\Exceptions\ConfigurationException;
 
-class Config {
+class Configuration {
     /**
      * Loaded config data
      *
@@ -26,10 +26,10 @@ class Config {
      * @param string $query
      * @return mixed
      */
-    public static function get(string $query): mixed {
-        $keys = explode($query, ".");
+    public static function get(string $query) {
+        $keys = explode(".", $query);
         if(count($keys) == 0){
-            throw new ConfigException("Invalid get query");
+            throw new ConfigurationException("Invalid get query");
         }
         $name = array_shift($keys);
         self::load($name);
@@ -42,7 +42,7 @@ class Config {
                 else
                     return $node[$key];
             else
-                throw new ConfigException("Cannot read key $key from $query");
+                throw new ConfigurationException("Cannot read key $key from $query");
         }
     }
 
@@ -56,12 +56,12 @@ class Config {
         if(!self::preloaded($name)){
             $path = self::path($name);
             if(!file_exists($path))
-                throw new ConfigException("Cannot retrieve file $path");
+                throw new ConfigurationException("Cannot retrieve file $path");
             $file = file_get_contents($path);
             try {
                 $parsed = Yaml::parse($file);
             }catch(\Exception $e){
-                throw new ConfigException("Cannot parse file $path, ".$e.__toString());
+                throw new ConfigurationException("Cannot parse file $path, ".$e.__toString());
             }
             self::$loaded[$name] = $parsed;
         }
@@ -73,7 +73,7 @@ class Config {
      * @param string $name
      * @return boolean
      */
-    protected static function preloaded(string $name): boolean {
+    protected static function preloaded(string $name): bool {
         return isset(self::$loaded[$name]);
     }
 

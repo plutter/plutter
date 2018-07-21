@@ -1,5 +1,5 @@
 <?php
-namespace Cellulax\Exception;
+namespace Plutter\Exceptions;
 
 use Exception;
 

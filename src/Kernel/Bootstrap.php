@@ -1,42 +1,26 @@
 <?php
-namespace Cellulax\Kernel;
+namespace Plutter\Kernel;
 
-use Cellulax\Kernel\Configuration;
-use Cellulax\Application;
 
 class Bootstrap {
     protected $config = [];
-    /**
-     * Bootstrap an application
-     *
-     * @param Application $app
-     */
-    public function __construct(Application $app){
-        $this->readComponents();
-        $this->loadComponents($app);
+    public function __construct(){
+        $mode = $this->getMode();
+        $this->bootstrapMode($mode);
     }
-
-    /**
-     * Get components
-     *
-     * @return void
-     */
-    private function readComponents(){
-        $this->config = Configuration::get("components.components");
-    }
-
-    /**
-     * Load components
-     *
-     * @param Application $app
-     * @return void
-     */
-    private function loadComponents(Application $app){
-        foreach($this->config as $name => $component){
-            $component = "\Cellulax\Component\\".$component;
-            $component = new $component($app);
-            $app->addComponent($name, $component);
-            $component->execute();
+    private function getMode(){
+        if(php_sapi_name() === 'cli' OR defined('STDIN')){
+            return 'cli';
+        }else{
+            return 'web';
         }
+    }
+    private function bootstrapMode($mode){
+        if($mode == 'web'){
+            $application = new Applications\Web;
+        }else{
+            $application = new Applications\Cli;
+        }
+        $application->process();
     }
 }
